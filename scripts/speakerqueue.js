@@ -3,29 +3,35 @@ function SpeakerQueue() {
 
     // this is just a simple wrapping around an array
 
-    this.list = new Array();
+    this.list = {};
     this.next = next;
     this.add = add;
+    this.countSpeakers = 0;
+    this.nextSpeaker = 0;
+    this.view = new this.SpeakerListView(document.getElementById("myList"));
 
     function add(who) {
-        this.list.push(who);
+        this.list[this.countSpeakers] = who;
+        this.view.drawSpeaker(who, this.countSpeakers);
+        this.countSpeakers++;
+
     }
 
     function next() {
-        return this.list.shift();
+        this.view.undrawSpeaker(this.nextSpeaker);
+        this.remove(this.nextSpeaker)
+        this.nextSpeaker++;
     }
 
-    function remove(who) {
-        var index = this.list.indexOf(who);
-        if (index > -1) {
-            array.splice(index, 1);
-        } else {
+    function remove(number) {
+        this.view.undrawSpeaker(number);
+        if (!(delete this.list[number])) {
             console.log("Error: "+who+" not in list");
         }
     }
 
     function size() {
-        return this.list.length;
+        return Object.keys(_speakersList).length;
     }
 
 }
