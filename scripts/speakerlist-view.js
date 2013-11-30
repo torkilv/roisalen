@@ -10,16 +10,15 @@
 function SpeakerQueueView(rootHTMLelement) {
 
     this.rootHTMLelement = rootHTMLelement;
-    this.countSpeakers = 0;
     this.suffix = ;
 
     this.drawSpeaker = drawSpeaker;
     this.undrawSpeaker = undrawSpeaker;
 
-    function drawSpeaker(speaker) {
+    function drawSpeaker(speaker, id) {
         this.countSpeakers++;
         temp = document.createElement("li");
-        temp.setAttribute('id',countSpeakers);
+        temp.setAttribute('id',id);
         temp.innerHTML = "<span class=\"num\">" + speaker.number + \
                          "</span> <span class=\"name\"" + speaker.name + \
                          "</span>" + "<span onclick=\"undrawSpeaker(" + \
